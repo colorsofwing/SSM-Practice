@@ -29,7 +29,7 @@
     List<Goods> list = (List<Goods>) request.getAttribute("list");
     int num = list.size();
     %>
-    alert("<%=num%>");
+    //alert("<%=num%>");
 </script>
 </body>
 </html>
