@@ -23,7 +23,7 @@
     产地：${item.getCommodity_made()}<br>
     <hr>
 </c:forEach>
-    <a href="/html/index.html">验证</a>
+    <a href="/html/index.html">Check</a>
 <script>
     <%
     List<Goods> list = (List<Goods>) request.getAttribute("list");
