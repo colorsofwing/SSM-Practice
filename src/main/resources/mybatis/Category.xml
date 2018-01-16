@@ -7,4 +7,7 @@
     <select id="list" resultType="tmall.pojo.Category">
         SELECT * FROM category ORDER BY id DESC
     </select>
+    <select id="total" resultType="int">
+        SELECT COUNT(*) FROM category
+    </select>
 </mapper>

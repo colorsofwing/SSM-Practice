@@ -71,6 +71,10 @@
                         <td>分类名称</td>
                         <td><input id="name" name="name" type="text" class="form-control"></td>
                     </tr>
+                    <tr>
+                        <td>分类图片</td>
+                        <td><input id="categoryPic" name="image" accept="image/*" type="file"></td>
+                    </tr>
                     <tr class="submitTR">
                         <td colspan="2" align="center">
                             <button type="submit" class="btn btn-success">提  交</button>
