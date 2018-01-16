@@ -19,6 +19,6 @@ public class CategoryController {
     public String list(Model model){
         List<Category> cs = categoryDaoImpl.list();
         model.addAttribute("cs",cs);
-        return "include/admin/listCategory";
+        return "admin/listCategory";
     }
 }

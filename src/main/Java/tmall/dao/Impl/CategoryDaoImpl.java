@@ -7,10 +7,11 @@ import tmall.pojo.Category;
 
 import java.util.List;
 
-@Service
+@Service("c")
 public class CategoryDaoImpl implements CategoryDao {
+
     @Autowired
-    CategoryDao categoryDao;
+    private CategoryDao categoryDao;
 
     public List<Category> list() {
         return categoryDao.list();
