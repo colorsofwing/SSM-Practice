@@ -1,7 +1,7 @@
 package tmall.util;
 
 public class Page {
-    private int start;//开始页数
+    private int start;//初始页第一条记录的行号（因为起始行号为0，故行号需要-1.）
     private int count;//每页显示页数
     private int total;//总个数
     private String param;//参数

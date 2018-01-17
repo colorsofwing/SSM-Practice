@@ -4,8 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="tmall.dao.CategoryDao">
-    <select id="list" resultType="tmall.pojo.Category">
+    <select id="list" resultType="tmall.pojo.Category" parameterType="tmall.util.Page">
         SELECT * FROM category ORDER BY id DESC
+        <if test="start!=null and count!=null">
+            limit #{start},#{count}
+        </if>
     </select>
     <select id="total" resultType="int">
         SELECT COUNT(*) FROM category
