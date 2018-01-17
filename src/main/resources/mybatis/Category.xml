@@ -10,6 +10,7 @@
             limit #{start},#{count}
         </if>
     </select>
+
     <select id="total" resultType="int">
         SELECT COUNT(*) FROM category
     </select>
