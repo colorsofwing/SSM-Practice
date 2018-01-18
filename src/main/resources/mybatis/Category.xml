@@ -14,4 +14,12 @@
     <select id="total" resultType="int">
         SELECT COUNT(*) FROM category
     </select>
+
+    <insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="tmall.pojo.Category">
+        INSERT INTO category(name) VALUES (#{name})
+    </insert>
+
+    <select id="get" resultType="tmall.pojo.Category" parameterType="java.lang.Integer">
+        SELECT * FROM category WHERE id = #{id}
+    </select>
 </mapper>

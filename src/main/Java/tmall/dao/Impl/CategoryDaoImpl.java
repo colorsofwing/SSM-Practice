@@ -17,7 +17,16 @@ public class CategoryDaoImpl implements CategoryDao {
     public List<Category> list(Page page) {
         return categoryDao.list(page);
     }
+
     public int total(){
         return categoryDao.total();
+    }
+
+    public void add(Category category){
+        categoryDao.add(category);
+    }
+
+    public Category get(Integer id) {
+        return categoryDao.get(id);
     }
 }
