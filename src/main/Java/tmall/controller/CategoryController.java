@@ -62,7 +62,7 @@ public class CategoryController {
     }
 
     @RequestMapping("/admin_category_edit")
-    public String get(int i,Model model){
+    public String get(Integer i,Model model){
         //除了直接用i接收参数，也可以用Category的实例接收参数。
         Category c = categoryDaoImpl.get(i);
         model.addAttribute("c",c);
