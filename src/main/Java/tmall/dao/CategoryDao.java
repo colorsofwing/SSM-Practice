@@ -14,4 +14,8 @@ public interface CategoryDao {
     void add(Category category);//增加记录
 
     Category get(Integer id);//选择特定id的记录
+
+    void update(Category category);//修改特定记录的属性
+
+    void delete(Integer id);//删除记录
 }

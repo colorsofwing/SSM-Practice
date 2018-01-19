@@ -22,4 +22,12 @@
     <select id="get" resultType="tmall.pojo.Category" parameterType="java.lang.Integer">
         SELECT * FROM category WHERE id = #{id}
     </select>
+
+    <update id="update" parameterType="tmall.pojo.Category">
+        UPDATE category SET name = #{name} WHERE id = #{id}
+    </update>
+    
+    <delete id="delete">
+        DELETE FROM category WHERE id = #{id}
+    </delete>
 </mapper>

@@ -29,4 +29,12 @@ public class CategoryDaoImpl implements CategoryDao {
     public Category get(Integer id) {
         return categoryDao.get(id);
     }
+
+    public void update(Category category){
+        categoryDao.update(category);
+    }
+
+    public void delete(Integer id){
+        categoryDao.delete(id);
+    }
 }
