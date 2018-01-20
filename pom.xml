@@ -122,6 +122,6 @@
 
   </dependencies>
   <build>
-    <finalName>spring-mybatis</finalName>
+    <finalName>SSM-Practice</finalName>
   </build>
 </project>

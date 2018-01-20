@@ -30,7 +30,7 @@ public class CategoryController {
     public String list(Model model, Page page){
         /*List<Category> cs = categoryDaoImpl.list(page);*/
         /*int total = categoryDaoImpl.total();*/
-        PageHelper.offsetPage(page.getStart(),page.getCount());
+        PageHelper.offsetPage(page.getStart(),page.getCount());//限定记录范围
         List<Category> cs = categoryDaoImpl.list();
         int total = (int)new PageInfo<>(cs).getTotal();
         page.setTotal(total);
