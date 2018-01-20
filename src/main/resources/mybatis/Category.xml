@@ -6,14 +6,14 @@
 <mapper namespace="tmall.dao.CategoryDao">
     <select id="list" resultType="tmall.pojo.Category" parameterType="tmall.util.Page">
         SELECT * FROM category ORDER BY id DESC
-        <if test="start!=null and count!=null">
-            limit #{start},#{count}
-        </if>
+        <!--<if test="start!=null and count!=null">
+            /*limit #{start},#{count}*/
+        </if>-->
     </select>
 
-    <select id="total" resultType="int">
+    <!--<select id="total" resultType="int">
         SELECT COUNT(*) FROM category
-    </select>
+    </select>-->
 
     <insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="tmall.pojo.Category">
         INSERT INTO category(name) VALUES (#{name})

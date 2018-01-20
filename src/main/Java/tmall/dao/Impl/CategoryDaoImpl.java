@@ -14,12 +14,16 @@ public class CategoryDaoImpl implements CategoryDao {
     @Autowired
     private CategoryDao categoryDao;
 
-    public List<Category> list(Page page) {
+    /*public List<Category> list(Page page) {
         return categoryDao.list(page);
-    }
+    }*/
 
-    public int total(){
+    /*public int total(){
         return categoryDao.total();
+    }*/
+
+    public List<Category> list() {
+        return categoryDao.list();
     }
 
     public void add(Category category){

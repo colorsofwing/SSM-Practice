@@ -10,9 +10,8 @@
         <module name="SSM Practice" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="spring-mybatis" target="1.5" />
-      <module name="SSM Practice" target="1.5" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="SSM Practice" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
