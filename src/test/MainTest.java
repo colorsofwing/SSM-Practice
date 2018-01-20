@@ -9,8 +9,8 @@ import java.util.List;
 
 public class MainTest {
     public static void main(String arg[]){
-        Page page=new Page();//实例已经使用默认构造函数初始化
-        System.out.print(page.getParam());
+        /*Page page=new Page();//实例已经使用默认构造函数初始化
+        System.out.print(page.getParam());*/
 
         /*ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:spring-mybatis.xml");
         CategoryDaoImpl service = (CategoryDaoImpl) ac.getBean("c");
