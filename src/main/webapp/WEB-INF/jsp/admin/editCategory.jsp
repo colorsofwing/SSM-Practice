@@ -11,7 +11,7 @@
 <%@ include file="../include/admin/adminHeader.jsp"%>
 <%@ include file="../include/admin/adminNavigator.jsp"%>
 
-    <title>编辑分类</title>
+<title>编辑分类</title>
 
 <script>
     $(function () {

@@ -14,7 +14,7 @@
     $(function(){
 
         $("#addForm").submit(function(){
-            if(!checkEmpty("name","分类名称"))
+            if(!checkEmpty("category_name","分类名称"))
                 return false;
             if(!checkEmpty("categoryPic","分类图片"))
                 return false;
@@ -69,7 +69,7 @@
                 <table class="addTable">
                     <tr>
                         <td>分类名称</td>
-                        <td><input id="name" name="name" type="text" class="form-control"></td>
+                        <td><input id="category_name" name="name" type="text" class="form-control"></td>
                     </tr>
                     <tr>
                         <td>分类图片</td>
