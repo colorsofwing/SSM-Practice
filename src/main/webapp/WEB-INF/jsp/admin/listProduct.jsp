@@ -32,7 +32,7 @@
 
     <ol class="breadcrumb">
         <li><a href="admin_category_list">所有分类</a></li>
-        <li><a href="/admin_product_list?cid=${c.id}">${c.name}</a></li>
+        <li><a href="admin_product_list?cid=${c.id}">${c.name}</a></li>
         <li class="active">产品管理</li>
     </ol>
 

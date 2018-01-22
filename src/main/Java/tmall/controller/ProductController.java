@@ -11,7 +11,7 @@ import tmall.dao.Impl.ProductDaoImpl;
 import tmall.pojo.Category;
 import tmall.pojo.Product;
 import tmall.util.Page;
-
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -29,7 +29,7 @@ public class ProductController {
         List<Product> pl = productDaoImpl.list(cid);
         int total = (int)new PageInfo<>(pl).getTotal();
         page.setTotal(total);
-        page.setParam("$cid="+c.getId());
+        page.setParam("&cid="+c.getId());
 
         model.addAttribute("c",c);
         model.addAttribute("pl",pl);
@@ -39,6 +39,7 @@ public class ProductController {
 
     @RequestMapping("/admin_product_add")
     public String add(Product p){
+        p.setCreateDate(new Date());
         productDaoImpl.add(p);
         return "redirect:admin_product_list?cid="+p.getCid();
     }
@@ -53,12 +54,15 @@ public class ProductController {
     @RequestMapping("/admin_product_edit")
     public String edit(Model model,Integer id){
         Product p = productDaoImpl.get(id);
+        Category c = categoryDaoImpl.get(p.getCid());
+        p.setCategory(c);
         model.addAttribute("p",p);
         return "admin/editProduct";
     }
 
     @RequestMapping("/admin_product_update")
-    public String update(){
-
+    public String update(Product p){
+        productDaoImpl.update(p);
+        return "redirect:admin_product_list?cid="+p.getCid();
     }
 }

@@ -53,6 +53,21 @@
                         <td>原价格</td>
                         <td><input type="text" id="originalPrice" name="originalPrice" class="form-control" value="${p.originalPrice}"></td>
                     </tr>
+                    <tr>
+                        <td>优惠价格</td>
+                        <td><input type="text" id="promotePrice" name="promotePrice" class="form-control" value="${p.promotePrice}"></td>
+                    </tr>
+                    <tr>
+                        <td>库存</td>
+                        <td><input type="text" id="stock" name="stock" class="form-control" value="${p.stock}"></td>
+                    </tr>
+                    <tr class="submitTR">
+                        <td colspan="2" align="center">
+                            <input type="hidden" name="id" value="${p.id}">
+                            <input type="hidden" name="cid" value="${p.cid}">
+                            <button type="submit" class="btn btn-success">提  交</button>
+                        </td>
+                    </tr>
                 </table>
             </form>
         </div>

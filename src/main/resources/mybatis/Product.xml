@@ -5,7 +5,7 @@
 
 <mapper namespace="tmall.dao.ProductDao">
     <insert id="add" parameterType="tmall.pojo.Product" keyProperty="id" useGeneratedKeys="true">
-        INSERT INTO product(name,subTitle,originalPrice,promotePrice,stock,cid) VALUES (#{name},#{subTitle},#{originalPrice},#{promotePrice},#{stock},#{cid})
+        INSERT INTO product(name,subTitle,originalPrice,promotePrice,stock,cid,createDate) VALUES (#{name},#{subTitle},#{originalPrice},#{promotePrice},#{stock},#{cid},#{createDate})
     </insert>
 
     <delete id="delete">
