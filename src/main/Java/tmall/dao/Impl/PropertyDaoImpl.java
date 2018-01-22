@@ -7,8 +7,8 @@ import tmall.pojo.Property;
 
 import java.util.List;
 
-@Service("p")
-public class PropertyDaoImpl {
+@Service("pp")
+public class PropertyDaoImpl implements PropertyDao {
 
     @Autowired
     private PropertyDao propertyDao;
