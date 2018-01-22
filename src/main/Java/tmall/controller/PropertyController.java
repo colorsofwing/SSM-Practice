@@ -54,6 +54,8 @@ public class PropertyController {
     @RequestMapping("/admin_property_edit")
     public String edit(Model model,Integer id){
         Property p = propertyDaoImpl.get(id);
+        Category c = categoryDaoImpl.get(p.getCid());
+        p.setCategory(c);
         model.addAttribute("p",p);
         return "admin/editProperty";
     }
