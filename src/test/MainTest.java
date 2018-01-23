@@ -4,9 +4,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import tmall.dao.Impl.CategoryDaoImpl;
 import tmall.dao.Impl.ProductDaoImpl;
 import tmall.dao.Impl.PropertyDaoImpl;
+import tmall.dao.Impl.PropertyValueDaoImpl;
 import tmall.pojo.Category;
 import tmall.pojo.Product;
 import tmall.pojo.Property;
+import tmall.pojo.PropertyValue;
 import tmall.util.Page;
 
 import java.sql.Timestamp;
@@ -36,13 +38,14 @@ public class MainTest {
             System.out.println(p.getId()+" "+p.getName()+" "+p.getCid()+'\n');
         }*/
         ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:spring-mybatis.xml");
-        ProductDaoImpl productDaoImpl=(ProductDaoImpl) ac.getBean("pd");
-        List<Product> pl = productDaoImpl.list(83);
-        for(Product product:pl){
+        PropertyValueDaoImpl propertyValueDao=(PropertyValueDaoImpl) ac.getBean("pv");
+        List<PropertyValue> pvl = propertyValueDao.list(91);
+        System.out.println(pvl);
+        /*for(Product product:pl){
             Integer j = product.getId();
             System.out.println(j);
             List<Integer> i = productDaoImpl.getImage(j);
             System.out.println(i);
-        }
+        }*/
     }
 }

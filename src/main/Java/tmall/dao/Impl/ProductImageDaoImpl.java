@@ -7,7 +7,7 @@ import tmall.pojo.ProductImage;
 
 import java.util.List;
 
-@Service
+@Service("pi")
 public class ProductImageDaoImpl implements ProductImageDao {
 
     @Autowired
