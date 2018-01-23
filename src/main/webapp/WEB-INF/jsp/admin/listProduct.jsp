@@ -57,7 +57,9 @@
                 <c:forEach items="${pl}" var="p">
                     <tr>
                         <td>${p.id}</td>
-                        <td>图片</td>
+                        <td>
+                            <%--<img src="img/productSingle/"--%>
+                        </td>
                         <td>${p.name}</td>
                         <td>${p.subTitle}</td>
                         <td>${p.originalPrice}</td>

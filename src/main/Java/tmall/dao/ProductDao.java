@@ -11,4 +11,6 @@ public interface ProductDao {
     public void update(Product product);
     public Product get(Integer id);
     public List<Product> list(Integer cid);
+    //查找对应的缩略图
+    public Integer getImage(Integer id);
 }

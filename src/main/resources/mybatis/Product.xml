@@ -23,4 +23,8 @@
     <select id="list" resultType="tmall.pojo.Product">
         SELECT * FROM product WHERE cid=#{cid} ORDER BY id DESC
     </select>
+
+    <select id="getImage" resultType="java.lang.Integer">
+        SELECT id FROM productimage WHERE pid=${id} AND type="type_single"
+    </select>
 </mapper>

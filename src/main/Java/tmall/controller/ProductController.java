@@ -27,6 +27,12 @@ public class ProductController {
         Category c = categoryDaoImpl.get(cid);
         PageHelper.offsetPage(page.getStart(),page.getCount());
         List<Product> pl = productDaoImpl.list(cid);
+
+        for(Product product:pl){
+            Integer i = productDaoImpl.getImage(product.getId());
+            product.setImageId(i);
+        }
+
         int total = (int)new PageInfo<>(pl).getTotal();
         page.setTotal(total);
         page.setParam("&cid="+c.getId());

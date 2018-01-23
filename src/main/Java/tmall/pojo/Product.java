@@ -13,6 +13,7 @@ public class Product {
     private Date createDate;
 
     private Category category;
+    private Integer imageId;
 
     public Integer getId() {
         return id;
@@ -84,5 +85,13 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Integer getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(Integer imageId) {
+        this.imageId = imageId;
     }
 }

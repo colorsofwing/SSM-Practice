@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tmall.dao.ProductImageDao">
+    <insert id="add" parameterType="tmall.pojo.ProductImage" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO productimage(pid,type) VALUES (#{pid},#{type})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM productimage WHERE id=#{id}
+    </delete>
+
+    <select id="get" parameterType="java.lang.Integer" resultType="tmall.pojo.ProductImage">
+        SELECT * FROM productimage WHERE id=#{id}
+    </select>
+
+    <select id="list" resultType="tmall.pojo.ProductImage">
+        SELECT * FROM productimage WHERE pid=#{pid} AND type=#{type} ORDER BY id DESC
+    </select>
+</mapper>

@@ -35,4 +35,9 @@ public class ProductDaoImpl implements ProductDao{
     public List<Product> list(Integer cid) {
         return productDao.list(cid);
     }
+
+    @Override
+    public Integer getImage(Integer id) {
+        return productDao.getImage(id);
+    }
 }
