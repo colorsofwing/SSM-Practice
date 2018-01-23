@@ -35,18 +35,14 @@ public class MainTest {
         for(Property p:list){
             System.out.println(p.getId()+" "+p.getName()+" "+p.getCid()+'\n');
         }*/
-       /* ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:spring-mybatis.xml");
+        ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:spring-mybatis.xml");
         ProductDaoImpl productDaoImpl=(ProductDaoImpl) ac.getBean("pd");
-        Product p = new Product();
-        p.setName("测试");
-        p.setCid(60);
-        p.setOriginalPrice(new Float(100));
-        p.setPromotePrice(new Float(50));
-        p.setStock(100);
-        *//*DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String time = sdf.format(new Date());*//*
-        p.setCreateDate(new Date());
-        System.out.println(new Date());
-        productDaoImpl.add(p);*/
+        List<Product> pl = productDaoImpl.list(83);
+        for(Product product:pl){
+            Integer j = product.getId();
+            System.out.println(j);
+            List<Integer> i = productDaoImpl.getImage(j);
+            System.out.println(i);
+        }
     }
 }

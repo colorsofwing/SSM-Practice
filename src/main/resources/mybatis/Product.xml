@@ -25,6 +25,6 @@
     </select>
 
     <select id="getImage" resultType="java.lang.Integer">
-        SELECT id FROM productimage WHERE pid=${id} AND type="type_single"
+        SELECT id FROM productimage WHERE pid=#{id} AND type="type_single"
     </select>
 </mapper>

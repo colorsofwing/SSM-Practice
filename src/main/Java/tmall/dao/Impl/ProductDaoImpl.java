@@ -1,5 +1,6 @@
 package tmall.dao.Impl;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tmall.dao.ProductDao;
@@ -37,7 +38,7 @@ public class ProductDaoImpl implements ProductDao{
     }
 
     @Override
-    public Integer getImage(Integer id) {
+    public List<Integer> getImage(Integer id) {
         return productDao.getImage(id);
     }
 }

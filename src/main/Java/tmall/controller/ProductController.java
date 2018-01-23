@@ -29,7 +29,8 @@ public class ProductController {
         List<Product> pl = productDaoImpl.list(cid);
 
         for(Product product:pl){
-            Integer i = productDaoImpl.getImage(product.getId());
+            List<Integer> array = productDaoImpl.getImage(product.getId());
+            Integer i = array.get(0);
             product.setImageId(i);
         }
 

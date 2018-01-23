@@ -1,5 +1,6 @@
 package tmall.dao;
 
+import org.apache.ibatis.annotations.Param;
 import tmall.pojo.Product;
 
 import java.util.List;
@@ -12,5 +13,5 @@ public interface ProductDao {
     public Product get(Integer id);
     public List<Product> list(Integer cid);
     //查找对应的缩略图
-    public Integer getImage(Integer id);
+    public List<Integer> getImage(Integer id);
 }
