@@ -12,7 +12,28 @@
 
 <title>编辑产品属性值</title>
 
-<script></script>
+<script>
+    $(function () {
+        $("input.pvValue").keyup(function () {
+            var value = $(this).val();
+            var url = "admin_propertyValue_update";
+            var id = $(this).attr("id");
+            var parentSpan = $(this).parent("span");
+            parentSpan.css("border","1px solid yellow");
+            $.post(url,
+                {"id":id,"value":value},
+                function (result) {
+                    if(result=="success"){
+                        parentSpan.css("border","1px solid green");
+                    }
+                    else{
+                        parentSpan.css("border","1px solid red");
+                    }
+                }
+            );
+        });
+    })
+</script>
 
 <div class="workingArea">
     <ol class="breadcrumb">
@@ -26,7 +47,7 @@
         <c:forEach items="${pvl}" var="pv">
             <div class="eachPV">
                 <span class="pvName">${pv.property.name}</span>
-                <span class="pvValue"><input type="text" class="pvValue" id="${pv.id}" value="${pv.value}"></span>
+                <span class="pvValue"><input type="text" class="pvValue" id="${pv.id}" value="${pv.value}" style="width: 198px"></span>
             </div>
         </c:forEach>
     </div>

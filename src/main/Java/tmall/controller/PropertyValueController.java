@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import tmall.dao.Impl.CategoryDaoImpl;
 import tmall.dao.Impl.ProductDaoImpl;
 import tmall.dao.Impl.PropertyDaoImpl;
@@ -30,6 +31,11 @@ public class PropertyValueController {
     @RequestMapping("admin_propertyValue_edit")
     public String list(Model model,Integer pid){
         List<PropertyValue> pvl = propertyValueDaoImpl.list(pid);
+        //新创建的产品在属性值表是没有记录的，要初始化
+        if(pvl.isEmpty()){
+            propertyValueDaoImpl.init(pid);
+            return "redirect:admin_propertyValue_edit?pid="+pid;
+        }
         for(PropertyValue pv:pvl){
             Property p = propertyDaoImpl.get(pv.getPtid());
             pv.setProperty(p);
@@ -42,5 +48,12 @@ public class PropertyValueController {
         model.addAttribute("p",p);
         model.addAttribute("pvl",pvl);
         return "admin/editPropertyValue";
+    }
+
+    @RequestMapping("/admin_propertyValue_update")
+    @ResponseBody
+    public String update(Integer id,String value){
+        propertyValueDaoImpl.update(id,value);
+        return "success";
     }
 }

@@ -15,26 +15,35 @@ public class PropertyValueDaoImpl implements PropertyValueDao{
 
     @Autowired
     private PropertyValueDao propertyValueDao;
-    @Autowired
-    private PropertyDao propertyDao;
 
-    /*@Override
-    public void update(PropertyValue.xml propertyValue) {
-        propertyValueDao.update(propertyValue);
+    @Override
+    public void update(Integer id,String value) {
+        propertyValueDao.update(id,value);
     }
 
     @Override
-    public PropertyValue.xml get(Integer pid, Integer ptid) {
-        return propertyValueDao.get(pid,ptid);
-    }*/
-
-    @Override
-    public List<PropertyValue> list(@Param("pid") Integer pid) {
+    public List<PropertyValue> list(Integer pid) {
         return propertyValueDao.list(pid);
     }
 
-    /*@Override
-    public void init(Product product) {
+    @Override
+    public void init(Integer pid) {
+        List<Integer> list_ptid = select_ptid(pid);
+        for(Integer ptid:list_ptid){
+            PropertyValue propertyValue = new PropertyValue();
+            propertyValue.setPid(pid);
+            propertyValue.setPtid(ptid);
+            add(propertyValue);
+        }
+    }
 
-    }*/
+    @Override
+    public List<Integer> select_ptid(Integer pid) {
+        return propertyValueDao.select_ptid(pid);
+    }
+
+    @Override
+    public void add(PropertyValue propertyValue) {
+        propertyValueDao.add(propertyValue);
+    }
 }

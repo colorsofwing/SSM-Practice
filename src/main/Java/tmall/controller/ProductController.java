@@ -28,11 +28,14 @@ public class ProductController {
         PageHelper.offsetPage(page.getStart(),page.getCount());
         List<Product> pl = productDaoImpl.list(cid);
 
-        for(Product product:pl){
-            List<Integer> array = productDaoImpl.getImage(product.getId());
-            Integer i = array.get(0);
-            product.setImageId(i);
-        }
+            for(Product product:pl){
+                List<Integer> array = productDaoImpl.getImage(product.getId());
+                if(!array.isEmpty()){
+                    Integer i = array.get(0);
+                    product.setImageId(i);
+                }
+            }
+
 
         int total = (int)new PageInfo<>(pl).getTotal();
         page.setTotal(total);

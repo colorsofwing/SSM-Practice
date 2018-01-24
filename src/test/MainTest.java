@@ -39,8 +39,8 @@ public class MainTest {
         }*/
         ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:spring-mybatis.xml");
         PropertyValueDaoImpl propertyValueDao=(PropertyValueDaoImpl) ac.getBean("pv");
-        List<PropertyValue> pvl = propertyValueDao.list(91);
-        System.out.println(pvl);
+        List<Integer> list_ptid = propertyValueDao.select_ptid(963);
+        System.out.println(list_ptid);
         /*for(Product product:pl){
             Integer j = product.getId();
             System.out.println(j);
