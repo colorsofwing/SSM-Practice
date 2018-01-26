@@ -20,7 +20,7 @@ public class Order {
     private Integer uid;
     private String status;
     //非数据库字段
-    private List<OrderItem> orderItems;
+    private List<OrderItem> orderItems;//订单项列表
     private User user;
     private Float total;//总金额
     private Integer totalNumber;//商品总数
@@ -28,22 +28,22 @@ public class Order {
     public String getStatusDesc(){
         String desc = "未知";
         switch (status){
-            case OrderDao.waitPay:
+            case OrderDao.WAIT_PAY:
                 desc="待付款";
                 break;
-            case OrderDao.waitDelivery:
+            case OrderDao.WAIT_DELIVERY:
                 desc="待发货";
                 break;
-            case OrderDao.waitConfirm:
+            case OrderDao.WAIT_CONFIRM:
                 desc="待确认";
                 break;
-            case OrderDao.waitReview:
+            case OrderDao.WAIT_REVIEW:
                 desc="待评价";
                 break;
-            case OrderDao.finish:
+            case OrderDao.FINISH:
                 desc="已完成";
                 break;
-            case OrderDao.delete:
+            case OrderDao.DELETE:
                 desc="已删除";
                 break;
             default:

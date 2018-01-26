@@ -24,12 +24,12 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public void update(Order order) {
-
+        orderDao.update(order);
     }
 
     @Override
     public Order get(Integer id) {
-        return null;
+        return orderDao.get(id);
     }
 
     @Override

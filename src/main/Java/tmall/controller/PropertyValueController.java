@@ -30,20 +30,28 @@ public class PropertyValueController {
 
     @RequestMapping("admin_propertyValue_edit")
     public String list(Model model,Integer pid){
-        List<PropertyValue> pvl = propertyValueDaoImpl.list(pid);
-        //新创建的产品在属性值表是没有记录的，要初始化
-        if(pvl.isEmpty()){
-            propertyValueDaoImpl.init(pid);
-            return "redirect:admin_propertyValue_edit?pid="+pid;
-        }
-        for(PropertyValue pv:pvl){
-            Property p = propertyDaoImpl.get(pv.getPtid());
-            pv.setProperty(p);
-        }
-        //Category c = categoryDaoImpl.get(pvl.get(0).getProperty().getCid());
+
+        //产品储存分类对象
         Product p = productDaoImpl.get(pid);
         Category c = categoryDaoImpl.get(p.getCid());
         p.setCategory(c);
+
+        //通过查找是否有新的ptid来决定是否需要初始化
+        List<Property> properties = propertyDaoImpl.list(c.getId());
+        c.setProperties(properties);
+        for(Property property:properties){
+            if(propertyValueDaoImpl.find(property.getId())==0){
+                //新创建的产品在属性值表是没有记录的，要初始化;或者是新增了属性，也要初始化
+                propertyValueDaoImpl.init(pid,property.getId());
+            }
+        }
+
+        List<PropertyValue> pvl = propertyValueDaoImpl.list(pid);
+        for(PropertyValue pv:pvl){
+            Property pt = propertyDaoImpl.get(pv.getPtid());
+            pv.setProperty(pt);
+        }
+        //Category c = categoryDaoImpl.get(pvl.get(0).getProperty().getCid());
 
         model.addAttribute("p",p);
         model.addAttribute("pvl",pvl);

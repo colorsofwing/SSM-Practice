@@ -26,15 +26,25 @@ public class PropertyValueDaoImpl implements PropertyValueDao{
         return propertyValueDao.list(pid);
     }
 
-    @Override
+    /*@Override
     public void init(Integer pid) {
         List<Integer> list_ptid = select_ptid(pid);
-        for(Integer ptid:list_ptid){
-            PropertyValue propertyValue = new PropertyValue();
-            propertyValue.setPid(pid);
-            propertyValue.setPtid(ptid);
-            add(propertyValue);
+        if(list_ptid != null){
+            for(Integer ptid:list_ptid){
+                PropertyValue propertyValue = new PropertyValue();
+                propertyValue.setPid(pid);
+                propertyValue.setPtid(ptid);
+                add(propertyValue);
+            }
         }
+    }*/
+
+    @Override
+    public void init(Integer pid, Integer ptid) {
+        PropertyValue propertyValue = new PropertyValue();
+        propertyValue.setPid(pid);
+        propertyValue.setPtid(ptid);
+        add(propertyValue);
     }
 
     @Override
@@ -45,5 +55,10 @@ public class PropertyValueDaoImpl implements PropertyValueDao{
     @Override
     public void add(PropertyValue propertyValue) {
         propertyValueDao.add(propertyValue);
+    }
+
+    @Override
+    public int find(Integer ptid) {
+        return propertyValueDao.find(ptid);
     }
 }

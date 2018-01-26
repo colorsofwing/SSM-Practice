@@ -7,4 +7,12 @@
     <select id="list" resultType="tmall.pojo.Order">
         SELECT * FROM order_ ORDER BY id DESC
     </select>
+
+    <select id="get" resultType="tmall.pojo.Order">
+        SELECT * FROM order_ WHERE id = #{id}
+    </select>
+
+    <update id="update" parameterType="tmall.pojo.Order">
+        UPDATE order_ SET payDate=#{payDate},deliveryDate=#{deliveryDate},confirmDate=#{confirmDate},status=#{status} WHERE id=#{id}
+    </update>
 </mapper>

@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import tmall.dao.Impl.CategoryDaoImpl;
+import tmall.dao.Impl.PropertyDaoImpl;
 import tmall.pojo.Category;
+import tmall.pojo.Property;
 import tmall.util.ImageUtil;
 import tmall.util.Page;
 import tmall.util.UploadedImageFile;
@@ -24,7 +26,9 @@ import java.util.List;
 @RequestMapping("")
 public class CategoryController {
     @Autowired
-    CategoryDaoImpl categoryDaoImpl;
+    private CategoryDaoImpl categoryDaoImpl;
+    @Autowired
+    private PropertyDaoImpl propertyDaoImpl;
 
     @RequestMapping("/admin_category_list")
     public String list(Model model, Page page){
@@ -32,6 +36,12 @@ public class CategoryController {
         /*int total = categoryDaoImpl.total();*/
         PageHelper.offsetPage(page.getStart(),page.getCount());//限定记录范围
         List<Category> cs = categoryDaoImpl.list();
+        //每个分类存储相应的产品属性
+        for(Category c:cs){
+            List<Property> propertyList = propertyDaoImpl.list(c.getId());
+            c.setProperties(propertyList);
+        }
+
         int total = (int)new PageInfo<>(cs).getTotal();
         page.setTotal(total);
         model.addAttribute("cs",cs);

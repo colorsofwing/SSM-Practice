@@ -12,7 +12,14 @@
 
 <title>订单管理</title>
 
-<script></script>
+<script>
+    $(function () {
+        $("button.orderPageCheckOrderItems").click(function () {
+            var oid = $(this).attr("oid");
+            $("tr.orderPageOrderItemTR[oid="+oid+"]").toggle();
+        })
+    });
+</script>
 
 <div class="workingArea">
     <h1 class="label label-info">订单管理</h1>
@@ -40,7 +47,7 @@
                     <tr>
                         <td>${order.id}</td>
                         <td>${order.statusDesc}</td>
-                        <td>￥<fmt:formatNumber type="number" var="${order.total}" minFractionDigits="2" /></td>
+                        <td>￥<fmt:formatNumber type="number" value="${order.total}" minFractionDigits="2" /></td>
                         <td align="center">${order.totalNumber}</td>
                         <td align="center">${order.user.name}</td>
                         <td><fmt:formatDate value="${order.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>

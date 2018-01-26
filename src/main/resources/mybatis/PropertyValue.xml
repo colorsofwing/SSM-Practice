@@ -19,4 +19,8 @@
     <insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="tmall.pojo.PropertyValue">
         INSERT INTO propertyvalue(pid,ptid) VALUES (#{pid},#{ptid})
     </insert>
+
+    <select id="find" resultType="int">
+        SELECT COUNT(*) FROM propertyvalue WHERE ptid=#{ptid}
+    </select>
 </mapper>

@@ -20,6 +20,14 @@
                 return false;
             return true;
         });
+
+        $('a').click(function () {
+            var propertyNum = $(this).attr("propertyNum")
+            if(propertyNum==0){
+                alert("请先设置分类属性！");
+                return false;
+            }
+        });
     });
 </script>
 
@@ -49,7 +57,7 @@
                         <td><img height="40px" src="img/category/${c.id}.jpg"></td>
                         <td>${c.name}</td>
                         <td><a href="admin_property_list?cid=${c.id}"><span class="glyphicon glyphicon-th-list"></span></a></td>
-                        <td><a href="admin_product_list?cid=${c.id}"><span class="glyphicon glyphicon-shopping-cart"></span></a></td>
+                        <td><a propertyNum="${c.properties.size()}" href="admin_product_list?cid=${c.id}"><span class="glyphicon glyphicon-shopping-cart"></span></a></td>
                         <td><a href="admin_category_edit?id=${c.id}"><span class="glyphicon glyphicon-edit"></span></a></td>
                         <td><a deleteLink="true" href="admin_category_delete?id=${c.id}"><span class="   glyphicon glyphicon-trash"></span></a></td>
                     </tr>

@@ -11,8 +11,11 @@ public interface OrderItemDao {
     void delete(Integer id);
     void update(OrderItem orderItem);
     OrderItem get(Integer id);
-    List<OrderItem> list();
+
     //根据订单查找订单项
-    void fill(Order order);
+    List<OrderItem> list(Order order);
+    //订单计算商品数量和总金额
+    void find(Order order);
+    //处理所有订单
     void fill(List<Order> orderList);
 }
