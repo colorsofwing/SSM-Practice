@@ -1,22 +1,8 @@
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import tmall.dao.Impl.CategoryDaoImpl;
-import tmall.dao.Impl.ProductDaoImpl;
-import tmall.dao.Impl.PropertyDaoImpl;
-import tmall.dao.Impl.PropertyValueDaoImpl;
-import tmall.pojo.Category;
-import tmall.pojo.Product;
-import tmall.pojo.Property;
-import tmall.pojo.PropertyValue;
-import tmall.util.Page;
+import tmall.Service.PropertyValueDaoImpl;
 
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 public class MainTest {

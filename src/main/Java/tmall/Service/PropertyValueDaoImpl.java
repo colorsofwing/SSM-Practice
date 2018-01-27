@@ -1,11 +1,8 @@
-package tmall.dao.Impl;
+package tmall.Service;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tmall.dao.PropertyDao;
 import tmall.dao.PropertyValueDao;
-import tmall.pojo.Product;
 import tmall.pojo.PropertyValue;
 
 import java.util.List;
