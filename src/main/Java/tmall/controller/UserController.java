@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import tmall.Service.UserDaoImpl;
+import tmall.service.UserDaoImpl;
 import tmall.pojo.User;
 import tmall.util.Page;
 
