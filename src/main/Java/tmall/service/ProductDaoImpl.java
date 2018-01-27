@@ -3,6 +3,7 @@ package tmall.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tmall.dao.ProductDao;
+import tmall.pojo.Category;
 import tmall.pojo.Product;
 
 import java.util.List;
@@ -39,5 +40,20 @@ public class ProductDaoImpl implements ProductDao{
     @Override
     public List<Integer> getImage(Integer id) {
         return productDao.getImage(id);
+    }
+
+    @Override
+    public void fill(List<Category> categoryList) {
+
+    }
+
+    @Override
+    public void fill(Category category) {
+
+    }
+
+    @Override
+    public void fillByRow(List<Category> categoryList) {
+
     }
 }

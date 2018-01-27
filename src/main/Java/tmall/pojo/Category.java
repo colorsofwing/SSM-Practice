@@ -7,6 +7,8 @@ public class Category {
     private String name;
     //非数据库字段
     private List<Property> properties;
+    private List<Product> products;
+    private List<List<Product>> productsByRow;
 
     public Integer getId() {
         return id;
@@ -30,5 +32,21 @@ public class Category {
 
     public void setProperties(List<Property> properties) {
         this.properties = properties;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public List<List<Product>> getProductsByRow() {
+        return productsByRow;
+    }
+
+    public void setProductsByRow(List<List<Product>> productsByRow) {
+        this.productsByRow = productsByRow;
     }
 }
