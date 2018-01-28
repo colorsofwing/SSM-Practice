@@ -1,4 +1,4 @@
-.show {
+.show1 {
 	border: 1px dotted skyblue !important;
 }
 
@@ -24,6 +24,17 @@ nav.top {
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
 	border-bottom-color: #e7e7e7;
+}
+
+div.top_middle{
+	max-width:1024px;
+	margin:0px auto;
+}
+
+div.simpleSearchOutDiv{
+	max-width:1024px;
+	margin:0px auto;
+	position:relative;
 }
 
 .redColor {
@@ -94,7 +105,7 @@ div.categoryWithCarousel {
 
 div.carouselBackgroundDiv{
 	width:100%;
-	height:510px;
+	height:540px;
 	background-color: #E8E8E8;
 	position: absolute;
 	top:36px;
@@ -109,7 +120,7 @@ div.categoryWithCarousel div.headbar {
 
 div.carousel-of-product {
 	width: 1024px;
-	height: 510px;
+	height: 540px;
 	margin:0px auto;
 }
 div.carousel-inner div.item img{
@@ -129,7 +140,7 @@ div.categoryWithCarousel div.categoryMenu {
 
 div.categoryWithCarousel div.productsAsideCategorys {
 	width: 825px;
-	height: 510px;
+	height: 540px;
 	background-color: white;
 	/* 	padding-bottom:10px; */
 	margin-left: 220px;
@@ -245,8 +256,8 @@ img.catear {
 
 img.logo {
 	position: absolute;
-	left: 0px;
-	top: 30px;
+	left: -40px;
+	top: -50px;
 /* 	z-index:-1; */
 }
 
@@ -2273,7 +2284,7 @@ a.productLink {
 }
 
 img.carouselImage {
-	height: 510px !important;
+	height: 540px !important;
 }
 
 div.noMatch {

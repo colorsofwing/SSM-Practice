@@ -15,8 +15,10 @@ public interface ProductDao {
     public List<Product> list(Integer cid);
     //查找对应的缩略图
     public List<Integer> getImage(Integer id);
-
+    //前端首页中分类下面需包含产品，同时分组
     void fill(List<Category> categoryList);
     void fill(Category category);
     void fillByRow(List<Category> categoryList);
+    //产品包含相应的产品图片
+    void findImage(List<Product> products);
 }
