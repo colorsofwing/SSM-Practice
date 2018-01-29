@@ -65,7 +65,7 @@ public class ProductDaoImpl implements ProductDao{
             List<List<Product>> pll = new ArrayList<>();
 
             //开始对分组下面的所有商品按组填充
-            int productNumberEachRow = 3;
+            int productNumberEachRow = 8;
             List<Product> productList_c = new ArrayList<>();//包装袋（8个一组）
             Iterator iterator = products.iterator();
             while (iterator.hasNext()){

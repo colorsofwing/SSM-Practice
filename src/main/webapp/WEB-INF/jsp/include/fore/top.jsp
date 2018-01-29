@@ -11,21 +11,29 @@
 <nav class="top">
     <div class="top_middle">
         <a href="${contextPath}">
-            <span class="glyphicon glyphicon-home redColor" style="color: #c40000;margin: 0px" />
+            <span class="glyphicon glyphicon-home redColor" style="color: #c40000;margin: 0px"></span>
             天猫首页
         </a>
 
         <span>喵，欢迎来到天猫</span>
 
-        <c:if test="${!empty user}">
-            <a href="login.jsp">${user.name}</a>
-            <a href="forelogout">退出</a>
-        </c:if>
+        <c:choose>
+            <c:when test="${!empty user}">
+                <a href="login.jsp">${user.name}</a>
+            </c:when>
+            <c:otherwise>
+                <a href="login.jsp">请登录</a>
+            </c:otherwise>
+        </c:choose>
 
-        <c:if test="${!empty user}">
-            <a href="login.jsp">请登录</a>
-            <a href="register.jsp">免费注册</a>
-        </c:if>
+        <c:choose>
+            <c:when test="${!empty user}">
+                <a href="forelogout">退出</a>
+            </c:when>
+            <c:otherwise>
+                <a href="register.jsp">免费注册</a>
+            </c:otherwise>
+        </c:choose>
 
         <span class="pull-right">
         <a href="forebought">我的订单</a>

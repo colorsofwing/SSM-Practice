@@ -8,12 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" isELIgnored="false" %>
 
 <script>
-    function showProductsAsideCategories(cid) {
+    function showProductsAsideCategorys(cid) {
         $("div.eachCategory[cid="+cid+"]").css("background-color","white");
         $("div.eachCategory[cid="+cid+"] a").css("color","#87CEFA");
-        $("div.productsAsideCategories[cid="+cid+"]").show();
+        $("div.productsAsideCategorys[cid="+cid+"]").show();
     }
-    function hideProductsAsideCategories(cid){
+    function hideProductsAsideCategorys(cid){
         $("div.eachCategory[cid="+cid+"]").css("background-color","#e2e2e3");
         $("div.eachCategory[cid="+cid+"] a").css("color","#000");
         $("div.productsAsideCategorys[cid="+cid+"]").hide();
@@ -21,19 +21,19 @@
     $(function(){
         $("div.eachCategory").mouseenter(function(){
             var cid = $(this).attr("cid");
-            showProductsAsideCategories(cid);
+            showProductsAsideCategorys(cid);
         });
         $("div.eachCategory").mouseleave(function(){
             var cid = $(this).attr("cid");
-            hideProductsAsideCategories(cid);
+            hideProductsAsideCategorys(cid);
         });
         $("div.productsAsideCategorys").mouseenter(function(){
             var cid = $(this).attr("cid");
-            showProductsAsideCategories(cid);
+            showProductsAsideCategorys(cid);
         });
         $("div.productsAsideCategorys").mouseleave(function(){
             var cid = $(this).attr("cid");
-            hideProductsAsideCategories(cid);
+            hideProductsAsideCategorys(cid);
         });
 
         $("div.rightMenu span").mouseenter(function(){
@@ -92,6 +92,6 @@
 
     <%@include file="carousel.jsp" %>
 
-    <div class="carouselBackgroundDiv"/>
+    <div class="carouselBackgroundDiv"></div>
 
 </div>

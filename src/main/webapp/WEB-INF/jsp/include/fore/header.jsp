@@ -63,7 +63,7 @@
                 $("div.orderItemSumDiv").css("height","100px");
             });
 
-            $("div#footer a[href$=#nowhere]").click(function(){
+            $("div#footer a[href=#nowhere]").click(function(){
                 alert("模仿天猫的连接，并没有跳转到实际的页面");
             });
 

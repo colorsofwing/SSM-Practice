@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Wing
@@ -19,7 +18,7 @@
             <button type="submit" class="searchButton">搜索</button>
             <div class="searchBelow">
                 <c:forEach items="${cs}" var="c" varStatus="st">
-                    <c:if test="${st.count}>=5 and ${st.count}<=8">
+                    <c:if test="${st.count>=5 and st.count<=8}">
                     <span>
                         <a href="foreCategory?cid=${c.id}">
                                 ${c.name}

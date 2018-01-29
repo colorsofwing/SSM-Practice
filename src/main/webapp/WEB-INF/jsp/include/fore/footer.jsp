@@ -7,8 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" isELIgnored="false" %>
 
-<%@ include file="modal.jsp" %>
-
 <div id="footer" class="footer" style="display: block">
 
     <div id="footer_ensure" class="footer_ensure">
@@ -111,6 +109,8 @@
     </div>
 
 </div>
+
+<%@ include file="modal.jsp" %>
 
 </body>
 </html>

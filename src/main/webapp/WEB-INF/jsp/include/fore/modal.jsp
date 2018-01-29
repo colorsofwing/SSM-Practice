@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" isELIgnored="false" %>
 
-<div class="modal " id="loginModal" tabindex="-1" role="dialog" >
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" >
     <div class="modal-dialog loginDivInProductPageModalDiv">
         <div class="modal-content">
             <div class="loginDivInProductPage">
