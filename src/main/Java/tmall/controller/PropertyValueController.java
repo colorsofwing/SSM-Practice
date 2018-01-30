@@ -58,6 +58,7 @@ public class PropertyValueController {
         return "admin/editPropertyValue";
     }
 
+    //如果要返回json数据格式，需要Jackson工具包的导入
     @RequestMapping("/admin_propertyValue_update")
     @ResponseBody
     public String update(Integer id,String value){

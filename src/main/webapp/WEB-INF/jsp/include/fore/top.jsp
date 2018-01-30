@@ -19,10 +19,10 @@
 
         <c:choose>
             <c:when test="${!empty user}">
-                <a href="login.jsp">${user.name}</a>
+                <a href="login">${user.name}</a>
             </c:when>
             <c:otherwise>
-                <a href="login.jsp">请登录</a>
+                <a href="login">请登录</a>
             </c:otherwise>
         </c:choose>
 
@@ -31,7 +31,7 @@
                 <a href="forelogout">退出</a>
             </c:when>
             <c:otherwise>
-                <a href="register.jsp">免费注册</a>
+                <a href="register">免费注册</a>
             </c:otherwise>
         </c:choose>
 

@@ -11,4 +11,12 @@
     <select id="get" resultType="tmall.pojo.User">
         SELECT * FROM user WHERE id = #{id}
     </select>
+
+    <select id="findname" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM user WHERE name = #{name}
+    </select>
+
+    <insert id="add" parameterType="tmall.pojo.User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user(name,password) VALUES (#{name},#{password})
+    </insert>
 </mapper>

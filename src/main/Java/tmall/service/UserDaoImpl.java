@@ -22,4 +22,23 @@ public class UserDaoImpl implements UserDao{
     public User get(Integer id) {
         return userDao.get(id);
     }
+
+    @Override
+    public void add(User user) {
+        userDao.add(user);
+    }
+
+    @Override
+    public Integer findname(String name) {
+        return userDao.findname(name);
+    }
+
+    @Override
+    public boolean isExist(String name) {
+        if(0!=findname(name)){
+            return true;
+        }else {
+            return false;
+        }
+    }
 }
