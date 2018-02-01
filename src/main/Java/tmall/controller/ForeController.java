@@ -13,11 +13,13 @@ import tmall.service.CategoryDaoImpl;
 import tmall.service.ProductDaoImpl;
 import tmall.service.UserDaoImpl;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
 @RequestMapping("")
+
 public class ForeController {
 
     @Autowired
@@ -26,12 +28,18 @@ public class ForeController {
     private ProductDaoImpl productDaoImpl;
     @Autowired
     private UserDaoImpl userDaoImpl;
+    @Autowired
+    private ServletContext servletContext;
 
     @RequestMapping("forehome")
     public String home(HttpSession session){
         List<Category> categories = categoryDaoImpl.list();
         productDaoImpl.fill(categories);
         productDaoImpl.fillByRow(categories);
+
+        //设置ServletContext全局变量
+        String contextPath = (String)servletContext.getInitParameter("contextPath");
+        servletContext.setAttribute("contextPath",contextPath);
 
         session.setAttribute("cs",categories);
         return "fore/home";
@@ -73,6 +81,12 @@ public class ForeController {
         }
 
         session.setAttribute("user",user);
+        return "redirect:forehome";
+    }
+
+    @RequestMapping("logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("user");
         return "redirect:forehome";
     }
 }

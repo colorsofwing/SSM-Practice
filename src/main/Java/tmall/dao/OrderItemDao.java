@@ -18,4 +18,6 @@ public interface OrderItemDao {
     void find(Order order);
     //处理所有订单
     void fill(List<Order> orderList);
+    //获取产品销量
+    Integer getSaleCount(int pid);
 }

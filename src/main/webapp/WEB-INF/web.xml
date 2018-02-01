@@ -46,4 +46,9 @@
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
+
+  <context-param>
+    <param-name>contextPath</param-name>
+    <param-value>forehome</param-value>
+  </context-param>
 </web-app>

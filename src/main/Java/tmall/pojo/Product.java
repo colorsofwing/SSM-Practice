@@ -1,6 +1,7 @@
 package tmall.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Product {
     private Integer id;
@@ -11,9 +12,13 @@ public class Product {
     private Integer stock;
     private Integer cid;
     private Date createDate;
-
+    //非数据库字段
     private Category category;
     private Integer imageId;
+    private List<ProductImage> productSingleImages;
+    private List<ProductImage> productDetailImages;
+    private int salesCount;
+    private int reviewCount;
 
     public Integer getId() {
         return id;
@@ -93,5 +98,37 @@ public class Product {
 
     public void setImageId(Integer imageId) {
         this.imageId = imageId;
+    }
+
+    public List<ProductImage> getProductSingleImages() {
+        return productSingleImages;
+    }
+
+    public void setProductSingleImages(List<ProductImage> productSingleImages) {
+        this.productSingleImages = productSingleImages;
+    }
+
+    public List<ProductImage> getProductDetailImages() {
+        return productDetailImages;
+    }
+
+    public void setProductDetailImages(List<ProductImage> productDetailImages) {
+        this.productDetailImages = productDetailImages;
+    }
+
+    public int getSalesCount() {
+        return salesCount;
+    }
+
+    public void setSalesCount(int salesCount) {
+        this.salesCount = salesCount;
+    }
+
+    public int getReviewCount() {
+        return reviewCount;
+    }
+
+    public void setReviewCount(int reviewCount) {
+        this.reviewCount = reviewCount;
     }
 }

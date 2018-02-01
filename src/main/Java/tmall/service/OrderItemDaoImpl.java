@@ -78,4 +78,9 @@ public class OrderItemDaoImpl implements OrderItemDao{
             find(order);
         }
     }
+
+    @Override
+    public Integer getSaleCount(int pid) {
+        return null;
+    }
 }
