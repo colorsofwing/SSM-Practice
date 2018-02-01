@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.util.HtmlUtils;
 import tmall.pojo.Category;
@@ -12,11 +13,11 @@ import tmall.service.CategoryDaoImpl;
 import tmall.service.ProductDaoImpl;
 import tmall.service.UserDaoImpl;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
 @RequestMapping("")
-@SessionAttributes(value={"cs","contextPath"})
 public class ForeController {
 
     @Autowired
@@ -27,17 +28,17 @@ public class ForeController {
     private UserDaoImpl userDaoImpl;
 
     @RequestMapping("forehome")
-    public String home(Model model){
+    public String home(HttpSession session){
         List<Category> categories = categoryDaoImpl.list();
         productDaoImpl.fill(categories);
         productDaoImpl.fillByRow(categories);
 
-        model.addAttribute("cs",categories);
+        session.setAttribute("cs",categories);
         return "fore/home";
     }
 
     @RequestMapping("foreregister")
-    public String register(Model model, User user){
+    public String register(Model model, User user,HttpSession session){
         String name = user.getName();
         //转义name，防止恶意注册。
         name = HtmlUtils.htmlEscape(name);
@@ -50,8 +51,28 @@ public class ForeController {
             model.addAttribute("user",null);
             return "fore/register";
         }
+        //防止跳过register.jsp，导致数据库出现空记录
+        if(name==null){
+            session.setAttribute("user",null);
+            return "fore/register";
+        }
         userDaoImpl.add(user);
+        session.setAttribute("user",user);
 
         return "fore/registerSuccess";
+    }
+
+    @RequestMapping("forelogin")
+    public String login(@RequestParam("name") String name, @RequestParam("password") String password, Model model, HttpSession session){
+        name = HtmlUtils.htmlEscape(name);
+        User user = userDaoImpl.getAccount(name,password);
+
+        if(user==null){
+            model.addAttribute("msg","账号密码错误");
+            return "fore/login";
+        }
+
+        session.setAttribute("user",user);
+        return "redirect:forehome";
     }
 }

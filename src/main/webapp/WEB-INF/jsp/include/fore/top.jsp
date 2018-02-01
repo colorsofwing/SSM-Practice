@@ -28,7 +28,7 @@
 
         <c:choose>
             <c:when test="${!empty user}">
-                <a href="forelogout">退出</a>
+                <a href="logout">退出</a>
             </c:when>
             <c:otherwise>
                 <a href="register">免费注册</a>

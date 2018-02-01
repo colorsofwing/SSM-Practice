@@ -29,13 +29,18 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public Integer findname(String name) {
-        return userDao.findname(name);
+    public Integer findName(String name) {
+        return userDao.findName(name);
+    }
+
+    @Override
+    public User getAccount(String name, String password) {
+        return userDao.getAccount(name,password);
     }
 
     @Override
     public boolean isExist(String name) {
-        if(0!=findname(name)){
+        if(0!=findName(name)){
             return true;
         }else {
             return false;
