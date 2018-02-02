@@ -5,13 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.util.HtmlUtils;
-import tmall.pojo.Category;
-import tmall.pojo.User;
-import tmall.service.CategoryDaoImpl;
-import tmall.service.ProductDaoImpl;
-import tmall.service.UserDaoImpl;
+import tmall.pojo.*;
+import tmall.service.*;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -30,6 +26,12 @@ public class ForeController {
     private UserDaoImpl userDaoImpl;
     @Autowired
     private ServletContext servletContext;
+    @Autowired
+    private ProductImageDaoImpl productImageDaoImpl;
+    @Autowired
+    private PropertyValueDaoImpl propertyValueDaoImpl;
+    @Autowired
+    private ReviewDaoImpl reviewDaoImpl;
 
     @RequestMapping("forehome")
     public String home(HttpSession session){
@@ -88,5 +90,28 @@ public class ForeController {
     public String logout(HttpSession session){
         session.removeAttribute("user");
         return "redirect:forehome";
+    }
+
+    @RequestMapping("foreproduct")
+    public String product(Model model,Integer pid){
+        Product product = productDaoImpl.get(pid);
+        List<ProductImage> productSingleImages = productImageDaoImpl.list(pid,"type_single");
+        List<ProductImage> productDetailImages = productImageDaoImpl.list(pid,"type_detail");
+        product.setProductSingleImages(productSingleImages);
+        product.setProductDetailImages(productDetailImages);
+
+        productDaoImpl.setCategory(product);
+        Integer picId = productDaoImpl.getImage(product.getId()).get(0);
+        product.setImageId(picId);
+
+        List<PropertyValue> pvs = propertyValueDaoImpl.list(pid);
+        propertyValueDaoImpl.setProperty(pvs);
+        List<Review> reviews = reviewDaoImpl.list(pid);
+        productDaoImpl.setSaleAndReviewNumber(product);
+
+        model.addAttribute("reviews",reviews);
+        model.addAttribute("p",product);
+        model.addAttribute("pvs",pvs);
+        return "fore/product";
     }
 }

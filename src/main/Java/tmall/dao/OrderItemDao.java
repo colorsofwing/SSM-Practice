@@ -14,10 +14,12 @@ public interface OrderItemDao {
 
     //根据订单查找订单项
     List<OrderItem> list(Order order);
+    //根据产品查找订单项
+    List<OrderItem> listProduct(Integer pid);
     //订单计算商品数量和总金额
     void find(Order order);
     //处理所有订单
     void fill(List<Order> orderList);
     //获取产品销量
-    Integer getSaleCount(int pid);
+    Integer getSalesCount(Integer pid);
 }

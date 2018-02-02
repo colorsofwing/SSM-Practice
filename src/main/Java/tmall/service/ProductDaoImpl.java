@@ -3,6 +3,7 @@ package tmall.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tmall.dao.ProductDao;
+import tmall.dao.ReviewDao;
 import tmall.pojo.Category;
 import tmall.pojo.Product;
 
@@ -14,6 +15,13 @@ import java.util.List;
 public class ProductDaoImpl implements ProductDao{
     @Autowired
     private ProductDao productDao;
+    @Autowired
+    private OrderItemDaoImpl orderItemDaoImpl;
+    @Autowired
+    private ReviewDaoImpl reviewDaoImpl;
+    @Autowired
+    private CategoryDaoImpl categoryDaoImpl;
+
     @Override
     public void add(Product product) {
         productDao.add(product);
@@ -90,5 +98,25 @@ public class ProductDaoImpl implements ProductDao{
                 product.setImageId(i);
             }
         }
+    }
+
+    @Override
+    public void setSaleAndReviewNumber(Product product) {
+        Integer salesCount = orderItemDaoImpl.getSalesCount(product.getId());
+        product.setSalesCount(salesCount);
+        Integer reviewCount = reviewDaoImpl.getCount(product.getId());
+        product.setReviewCount(reviewCount);
+    }
+
+    @Override
+    public void setSaleAndReviewNumber(List<Product> products) {
+        for(Product product:products){
+            setSaleAndReviewNumber(product);
+        }
+    }
+
+    public void setCategory(Product product){
+        Category category = categoryDaoImpl.get(product.getCid());
+        product.setCategory(category);
     }
 }

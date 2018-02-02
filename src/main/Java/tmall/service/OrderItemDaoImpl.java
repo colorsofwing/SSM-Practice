@@ -16,7 +16,7 @@ public class OrderItemDaoImpl implements OrderItemDao{
     @Autowired
     private OrderItemDao orderItemDao;
     @Autowired
-    private ProductDao productDao;
+    private ProductDaoImpl productDaoImpl;
 
     @Override
     public void add(OrderItem orderItem) {
@@ -44,6 +44,23 @@ public class OrderItemDaoImpl implements OrderItemDao{
     }
 
     @Override
+    public List<OrderItem> listProduct(Integer pid) {
+        return orderItemDao.listProduct(pid);
+    }
+
+    private void setProductAndImageId(OrderItem orderItem){
+        //找到相应的产品
+        Product p = productDaoImpl.get(orderItem.getPid());
+        //存储产品图片id以及产品对象
+        List<Integer> array = productDaoImpl.getImage(p.getId());
+        if(!array.isEmpty()){
+            Integer i = array.get(0);
+            p.setImageId(i);
+        }
+        orderItem.setProduct(p);
+    }
+
+    @Override
     public void find(Order order) {
         //获取所有订单项
         List<OrderItem> orderItemList = list(order);
@@ -52,15 +69,8 @@ public class OrderItemDaoImpl implements OrderItemDao{
         float totalPrice = 0;
         int totalAmount = 0;
         for(OrderItem orderItem:orderItemList){
-            //找到相应的产品
-            Product p = productDao.get(orderItem.getPid());
-            //存储产品图片id以及产品对象
-            List<Integer> array = productDao.getImage(p.getId());
-            if(!array.isEmpty()){
-                Integer i = array.get(0);
-                p.setImageId(i);
-            }
-            orderItem.setProduct(p);
+            //设置产品和图片属性
+            setProductAndImageId(orderItem);
             //计算
             Integer amount = orderItem.getNumber();
             Float price = amount * orderItem.getProduct().getPromotePrice();
@@ -80,7 +90,12 @@ public class OrderItemDaoImpl implements OrderItemDao{
     }
 
     @Override
-    public Integer getSaleCount(int pid) {
-        return null;
+    public Integer getSalesCount(Integer pid) {
+        List<OrderItem> orderItems = listProduct(pid);
+        Integer salesCount = 0;
+        for(OrderItem orderItem:orderItems){
+            salesCount+=orderItem.getNumber();
+        }
+        return salesCount;
     }
 }

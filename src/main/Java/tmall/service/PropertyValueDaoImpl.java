@@ -2,7 +2,9 @@ package tmall.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tmall.dao.PropertyDao;
 import tmall.dao.PropertyValueDao;
+import tmall.pojo.Property;
 import tmall.pojo.PropertyValue;
 
 import java.util.List;
@@ -12,6 +14,8 @@ public class PropertyValueDaoImpl implements PropertyValueDao{
 
     @Autowired
     private PropertyValueDao propertyValueDao;
+    @Autowired
+    private PropertyDao propertyDao;
 
     @Override
     public void update(Integer id,String value) {
@@ -57,5 +61,16 @@ public class PropertyValueDaoImpl implements PropertyValueDao{
     @Override
     public int find(Integer ptid) {
         return propertyValueDao.find(ptid);
+    }
+
+    private void setProperty(PropertyValue propertyValue){
+        Property property = propertyDao.get(propertyValue.getPtid());
+        propertyValue.setProperty(property);
+    }
+
+    public void setProperty(List<PropertyValue> propertyValues){
+        for(PropertyValue propertyValue:propertyValues){
+            setProperty(propertyValue);
+        }
     }
 }

@@ -47,10 +47,11 @@ public class PropertyValueController {
         }
 
         List<PropertyValue> pvl = propertyValueDaoImpl.list(pid);
-        for(PropertyValue pv:pvl){
+        propertyValueDaoImpl.setProperty(pvl);
+        /*for(PropertyValue pv:pvl){
             Property pt = propertyDaoImpl.get(pv.getPtid());
             pv.setProperty(pt);
-        }
+        }*/
         //Category c = categoryDaoImpl.get(pvl.get(0).getProperty().getCid());
 
         model.addAttribute("p",p);

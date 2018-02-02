@@ -21,4 +21,7 @@ public interface ProductDao {
     void fillByRow(List<Category> categoryList);
     //产品包含相应的产品图片
     void findImage(List<Product> products);
+    //设置销量和评价数量
+    void setSaleAndReviewNumber(Product product);
+    void setSaleAndReviewNumber(List<Product> products);
 }
