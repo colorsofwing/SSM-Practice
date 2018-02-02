@@ -897,7 +897,8 @@ div.infoInimgAndInfo span.productNumberSettingSpan {
 div.infoInimgAndInfo input.productNumberSetting {
 	border: 0px;
 	height: 80%;
-	width: 80%;
+	width: 100%;
+	text-align: center;
 }
 
 div.productNumber span.glyphicon {

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.HtmlUtils;
 import tmall.pojo.*;
 import tmall.service.*;
@@ -40,7 +41,7 @@ public class ForeController {
         productDaoImpl.fillByRow(categories);
 
         //设置ServletContext全局变量
-        String contextPath = (String)servletContext.getInitParameter("contextPath");
+        String contextPath = servletContext.getInitParameter("contextPath");
         servletContext.setAttribute("contextPath",contextPath);
 
         session.setAttribute("cs",categories);
@@ -113,5 +114,31 @@ public class ForeController {
         model.addAttribute("p",product);
         model.addAttribute("pvs",pvs);
         return "fore/product";
+    }
+
+    @RequestMapping("forecheckLogin")
+    @ResponseBody
+    public String checkLogin(HttpSession session){
+        //游客状态时，因为没有初始化，所以user为null。
+        User user = (User) session.getAttribute("user");
+        if(user != null){
+            return "success";
+        }else {
+            return "failure";
+        }
+    }
+
+    @RequestMapping("foreloginAjax")
+    @ResponseBody
+    public String loginAjax(@RequestParam("name") String name,@RequestParam("password") String password,HttpSession session){
+        name = HtmlUtils.htmlEscape(name);
+        User user = userDaoImpl.getAccount(name,password);
+
+        if(user==null){
+            return "failure";
+        }else {
+            session.setAttribute("user",user);
+            return "success";
+        }
     }
 }
