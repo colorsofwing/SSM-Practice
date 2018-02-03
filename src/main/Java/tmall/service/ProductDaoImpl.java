@@ -52,6 +52,13 @@ public class ProductDaoImpl implements ProductDao{
         return productDao.getImage(id);
     }
 
+    public void getImage(List<Product> products){
+        for(Product product:products){
+            Integer imageId = getImage(product.getId()).get(0);
+            product.setImageId(imageId);
+        }
+    }
+
     @Override
     public void fill(List<Category> categoryList) {
         for(Category category:categoryList){
@@ -113,6 +120,11 @@ public class ProductDaoImpl implements ProductDao{
         for(Product product:products){
             setSaleAndReviewNumber(product);
         }
+    }
+
+    @Override
+    public List<Product> search(String keyword) {
+        return productDao.search(keyword);
     }
 
     public void setCategory(Product product){

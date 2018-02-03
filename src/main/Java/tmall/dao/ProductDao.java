@@ -24,4 +24,6 @@ public interface ProductDao {
     //设置销量和评价数量
     void setSaleAndReviewNumber(Product product);
     void setSaleAndReviewNumber(List<Product> products);
+    //模糊查询
+    List<Product> search(@Param("keyword") String keyword);
 }

@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.HtmlUtils;
+import tmall.comparator.*;
 import tmall.pojo.*;
 import tmall.service.*;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -140,5 +142,44 @@ public class ForeController {
             session.setAttribute("user",user);
             return "success";
         }
+    }
+
+    @RequestMapping("forecategory")
+    public String category(@RequestParam("cid") Integer cid,String sort,Model model){
+        Category category = categoryDaoImpl.get(cid);
+        productDaoImpl.fill(category);
+        productDaoImpl.setSaleAndReviewNumber(category.getProducts());
+        productDaoImpl.getImage(category.getProducts());
+
+        if(sort!=null){
+            switch (sort){
+                case "all":
+                    Collections.sort(category.getProducts(),new ComprehensiveComparator());
+                    break;
+                case "review":
+                    Collections.sort(category.getProducts(),new ProductReviewComparator());
+                    break;
+                case "date":
+                    Collections.sort(category.getProducts(),new ProductDateComparator());
+                    break;
+                case "saleCount":
+                    Collections.sort(category.getProducts(),new ProductSaleCountComparator());
+                    break;
+                case "price":
+                    Collections.sort(category.getProducts(),new ProductPriceComparator());
+                    break;
+            }
+        }
+        model.addAttribute("c",category);
+        return "fore/category";
+    }
+
+    @RequestMapping("foresearch")
+    public String search(@RequestParam("keyword") String keyword,Model model){
+        List<Product> products = productDaoImpl.search(keyword);
+        productDaoImpl.setSaleAndReviewNumber(products);
+        productDaoImpl.getImage(products);
+        model.addAttribute("ps",products);
+        return "fore/searchResult";
     }
 }

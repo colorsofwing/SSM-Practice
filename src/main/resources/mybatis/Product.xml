@@ -27,4 +27,8 @@
     <select id="getImage" resultType="java.lang.Integer">
         SELECT id FROM productimage WHERE pid=#{id} AND type="type_single"
     </select>
+
+    <select id="search" resultType="tmall.pojo.Product">
+        SELECT * FROM product WHERE name LIKE '%${keyword}%' limit 20
+    </select>
 </mapper>
