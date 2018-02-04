@@ -20,7 +20,7 @@ public class OrderItemDaoImpl implements OrderItemDao{
 
     @Override
     public void add(OrderItem orderItem) {
-
+        orderItemDao.add(orderItem);
     }
 
     @Override
@@ -30,12 +30,12 @@ public class OrderItemDaoImpl implements OrderItemDao{
 
     @Override
     public void update(OrderItem orderItem) {
-
+        orderItemDao.update(orderItem);
     }
 
     @Override
     public OrderItem get(Integer id) {
-        return null;
+        return orderItemDao.get(id);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class OrderItemDaoImpl implements OrderItemDao{
         return orderItemDao.listProduct(pid);
     }
 
-    private void setProductAndImageId(OrderItem orderItem){
+    public void setProductAndImageId(OrderItem orderItem){
         //找到相应的产品
         Product p = productDaoImpl.get(orderItem.getPid());
         //存储产品图片id以及产品对象
@@ -97,5 +97,10 @@ public class OrderItemDaoImpl implements OrderItemDao{
             salesCount+=orderItem.getNumber();
         }
         return salesCount;
+    }
+
+    @Override
+    public List<OrderItem> listUser(Integer uid) {
+        return orderItemDao.listUser(uid);
     }
 }

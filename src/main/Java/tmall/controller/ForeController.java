@@ -13,6 +13,7 @@ import tmall.service.*;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -35,6 +36,8 @@ public class ForeController {
     private PropertyValueDaoImpl propertyValueDaoImpl;
     @Autowired
     private ReviewDaoImpl reviewDaoImpl;
+    @Autowired
+    private OrderItemDaoImpl orderItemDaoImpl;
 
     @RequestMapping("forehome")
     public String home(HttpSession session){
@@ -181,5 +184,85 @@ public class ForeController {
         productDaoImpl.getImage(products);
         model.addAttribute("ps",products);
         return "fore/searchResult";
+    }
+
+    @RequestMapping("forebuyone")
+    public String buyOne(Integer pid,Integer num,HttpSession session){
+        Product p = productDaoImpl.get(pid);
+        User user = (User) session.getAttribute("user");
+        boolean exist = false;
+        Integer oiid = 0;
+
+        //判断该购买产品是否已经在购物车中，如果有，则更新数量。
+        List<OrderItem> orderItems = orderItemDaoImpl.listUser(user.getId());
+        for (OrderItem orderItem:orderItems){
+            if(orderItem.getPid().intValue()==p.getId().intValue()){
+                orderItem.setNumber(num+orderItem.getNumber());
+                orderItemDaoImpl.update(orderItem);
+                exist = true;
+                oiid = orderItem.getId();
+                break;
+            }
+        }
+
+        if(exist==false){
+            OrderItem oi = new OrderItem();
+            oi.setNumber(num);
+            oi.setPid(pid);
+            oi.setOid(-1);
+            oi.setUid(user.getId());
+            oi.setProduct(p);
+            orderItemDaoImpl.add(oi);
+            oiid = oi.getId();
+        }
+        return "redirect:forebuy?oiid="+oiid;
+    }
+
+    @RequestMapping("foreaddCart")
+    @ResponseBody
+    public String addCart(Integer pid,Integer num,HttpSession session){
+        Product p = productDaoImpl.get(pid);
+        User user = (User) session.getAttribute("user");
+        boolean exist = false;
+
+        //判断该购买产品是否已经在购物车中，如果有，则更新数量。
+        List<OrderItem> orderItems = orderItemDaoImpl.listUser(user.getId());
+        for (OrderItem orderItem:orderItems){
+            if(orderItem.getPid().intValue()==p.getId().intValue()){
+                orderItem.setNumber(num+orderItem.getNumber());
+                orderItemDaoImpl.update(orderItem);
+                exist = true;
+                break;
+            }
+        }
+
+        if(exist==false){
+            OrderItem oi = new OrderItem();
+            oi.setNumber(num);
+            oi.setPid(pid);
+            oi.setOid(-1);
+            oi.setUid(user.getId());
+            oi.setProduct(p);
+            orderItemDaoImpl.add(oi);
+        }
+        return "success";
+    }
+
+    @RequestMapping("forebuy")
+    public String buy(String[] oiid,Model model,HttpSession session){
+        List<OrderItem> ois = new ArrayList<>();
+        float total = 0;
+
+        for(String strid:oiid){
+            Integer id = Integer.parseInt(strid);
+            OrderItem oi = orderItemDaoImpl.get(id);
+            orderItemDaoImpl.setProductAndImageId(oi);
+            total+=oi.getNumber()*oi.getProduct().getPromotePrice();
+            ois.add(oi);
+        }
+
+        session.setAttribute("ois",ois);
+        model.addAttribute("total",total);
+        return "fore/buy";
     }
 }

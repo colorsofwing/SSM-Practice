@@ -2,6 +2,7 @@ package tmall.dao;
 
 import tmall.pojo.Order;
 import tmall.pojo.OrderItem;
+import tmall.pojo.User;
 
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface OrderItemDao {
     void fill(List<Order> orderList);
     //获取产品销量
     Integer getSalesCount(Integer pid);
+    //根据用户查找订单项
+    List<OrderItem> listUser(Integer uid);
 }

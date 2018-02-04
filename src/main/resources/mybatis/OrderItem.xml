@@ -11,4 +11,20 @@
     <select id="listProduct" resultType="tmall.pojo.OrderItem">
         SELECT * FROM orderitem WHERE pid = #{pid}
     </select>
+
+    <select id="listUser" resultType="tmall.pojo.OrderItem">
+        SELECT * FROM orderitem WHERE uid = #{uid}
+    </select>
+
+    <update id="update" parameterType="tmall.pojo.OrderItem">
+        UPDATE orderitem SET number = #{number} WHERE id = #{id}
+    </update>
+
+    <insert id="add" parameterType="tmall.pojo.OrderItem" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO orderitem(pid,oid,uid,number) VALUES (#{pid},#{oid},#{uid},#{number})
+    </insert>
+
+    <select id="get" resultType="tmall.pojo.OrderItem">
+        SELECT * FROM orderitem WHERE id = #{id}
+    </select>
 </mapper>
