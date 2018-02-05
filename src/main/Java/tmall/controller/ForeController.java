@@ -248,6 +248,48 @@ public class ForeController {
         return "success";
     }
 
+    @RequestMapping("forecart")
+    public String cart(HttpSession session,Model model){
+        User user = (User)session.getAttribute("user");
+        List<OrderItem> ois = orderItemDaoImpl.listUser(user.getId());
+        orderItemDaoImpl.setProductAndImageId(ois);
+        model.addAttribute("ois",ois);
+        return "fore/cart";
+    }
+
+    @RequestMapping("forechangeOrderItem")
+    @ResponseBody
+    public String changeOrderItem(HttpSession session,@RequestParam("pid") Integer pid,@RequestParam("number") Integer num){
+        User user = (User) session.getAttribute("user");
+        if(user==null){
+            return "failure";
+        }
+
+        List<OrderItem> ois = orderItemDaoImpl.listUser(user.getId());
+        orderItemDaoImpl.setProductAndImageId(ois);
+        for(OrderItem oi:ois){
+            //必须使用intValue,否则比较的是Integer引用（内存地址）
+            if(oi.getPid().intValue()==pid.intValue()){
+                oi.setNumber(num);
+                orderItemDaoImpl.update(oi);
+                break;
+            }
+        }
+        return "success";
+    }
+
+    @RequestMapping("foredeleteOrderItem")
+    @ResponseBody
+    public String deleteOrderItem(Integer oiid,HttpSession session){
+        User user = (User) session.getAttribute("user");
+        if(user==null){
+            return "failure";
+        }
+
+        orderItemDaoImpl.delete(oiid);
+        return "success";
+    }
+
     @RequestMapping("forebuy")
     public String buy(String[] oiid,Model model,HttpSession session){
         List<OrderItem> ois = new ArrayList<>();

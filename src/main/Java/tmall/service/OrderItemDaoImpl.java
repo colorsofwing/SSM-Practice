@@ -25,7 +25,7 @@ public class OrderItemDaoImpl implements OrderItemDao{
 
     @Override
     public void delete(Integer id) {
-
+        orderItemDao.delete(id);
     }
 
     @Override
@@ -58,6 +58,12 @@ public class OrderItemDaoImpl implements OrderItemDao{
             p.setImageId(i);
         }
         orderItem.setProduct(p);
+    }
+
+    public void setProductAndImageId(List<OrderItem> orderItems){
+        for(OrderItem orderItem:orderItems){
+            setProductAndImageId(orderItem);
+        }
     }
 
     @Override

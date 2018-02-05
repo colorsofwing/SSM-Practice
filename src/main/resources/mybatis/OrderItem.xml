@@ -13,7 +13,7 @@
     </select>
 
     <select id="listUser" resultType="tmall.pojo.OrderItem">
-        SELECT * FROM orderitem WHERE uid = #{uid}
+        SELECT * FROM orderitem WHERE uid = #{uid} AND oid = '-1'
     </select>
 
     <update id="update" parameterType="tmall.pojo.OrderItem">
@@ -23,6 +23,10 @@
     <insert id="add" parameterType="tmall.pojo.OrderItem" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO orderitem(pid,oid,uid,number) VALUES (#{pid},#{oid},#{uid},#{number})
     </insert>
+
+    <delete id="delete">
+        DELETE FROM orderitem WHERE id = #{id}
+    </delete>
 
     <select id="get" resultType="tmall.pojo.OrderItem">
         SELECT * FROM orderitem WHERE id = #{id}
