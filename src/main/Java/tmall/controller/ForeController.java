@@ -291,12 +291,12 @@ public class ForeController {
     }
 
     @RequestMapping("forebuy")
-    public String buy(String[] oiid,Model model,HttpSession session){
+    public String buy(Integer[] oiid,Model model,HttpSession session){
         List<OrderItem> ois = new ArrayList<>();
         float total = 0;
 
-        for(String strid:oiid){
-            Integer id = Integer.parseInt(strid);
+        for(Integer id:oiid){
+            /*Integer id = Integer.parseInt(strid);*/
             OrderItem oi = orderItemDaoImpl.get(id);
             orderItemDaoImpl.setProductAndImageId(oi);
             total+=oi.getNumber()*oi.getProduct().getPromotePrice();
