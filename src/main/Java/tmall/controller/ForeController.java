@@ -28,8 +28,8 @@ public class ForeController {
     private ProductDaoImpl productDaoImpl;
     @Autowired
     private UserDaoImpl userDaoImpl;
-    @Autowired
-    private ServletContext servletContext;
+    /*@Autowired
+    private ServletContext servletContext;*/
     @Autowired
     private ProductImageDaoImpl productImageDaoImpl;
     @Autowired
@@ -40,16 +40,16 @@ public class ForeController {
     private OrderItemDaoImpl orderItemDaoImpl;
 
     @RequestMapping("forehome")
-    public String home(HttpSession session){
+    public String home(Model model) {
         List<Category> categories = categoryDaoImpl.list();
         productDaoImpl.fill(categories);
         productDaoImpl.fillByRow(categories);
 
-        //设置ServletContext全局变量
+        /*//设置ServletContext全局变量
         String contextPath = servletContext.getInitParameter("contextPath");
-        servletContext.setAttribute("contextPath",contextPath);
+        servletContext.setAttribute("contextPath",contextPath);*/
 
-        session.setAttribute("cs",categories);
+        model.addAttribute("cs", categories);
         return "fore/home";
     }
 

@@ -15,4 +15,9 @@
     <update id="update" parameterType="tmall.pojo.Order">
         UPDATE order_ SET payDate=#{payDate},deliveryDate=#{deliveryDate},confirmDate=#{confirmDate},status=#{status} WHERE id=#{id}
     </update>
+
+    <insert id="add" parameterType="tmall.pojo.Order" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO order_(orderCode,address,post,receiver,mobile,userMessage,createDate,payDate,deliveryDate,confirmDate,uid,status)
+        VALUES (#{orderCode},#{address},#{post},#{receiver},#{mobile},#{userMessage},#{createDate},#{payDate},#{deliveryDate},#{confirmDate},#{uid},#{status})
+    </insert>
 </mapper>

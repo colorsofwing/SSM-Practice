@@ -21,4 +21,18 @@
 
     <!--上传文件解析器-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
+    <!--拦截器-->
+    <mvc:interceptors>
+        <!--登录状态拦截器-->
+        <mvc:interceptor>
+            <mvc:mapping path="/fore*"/>
+            <bean class="tmall.interceptor.LoginInterceptor"></bean>
+        </mvc:interceptor>
+        <!--其他拦截器-->
+        <mvc:interceptor>
+            <mvc:mapping path="/fore*"/>
+            <bean class="tmall.interceptor.OtherInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

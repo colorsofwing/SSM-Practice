@@ -2,6 +2,7 @@ package tmall.dao;
 
 import org.apache.ibatis.annotations.Param;
 import tmall.pojo.Order;
+import tmall.pojo.OrderItem;
 
 import java.util.List;
 
@@ -16,6 +17,8 @@ public interface OrderDao {
 
     //增删改查
     void add(Order order);
+
+    float add(Order order, List<OrderItem> ois);
     void delete(Integer id);
     void update(Order order);
     Order get(@Param("id") Integer id);
