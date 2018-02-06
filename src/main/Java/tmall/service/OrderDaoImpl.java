@@ -29,12 +29,12 @@ public class OrderDaoImpl implements OrderDao {
         //新增订单
         add(order);
 
-        if (true)
-            throw new RuntimeException();
+        /*if (true)
+            throw new RuntimeException();*/
 
         //修改oid，使购物车清空
         for (OrderItem oi : ois) {
-            oi.setOid(oi.getOid());
+            oi.setOid(order.getId());
             orderItemDaoImpl.update(oi);
             total += oi.getNumber() * oi.getProduct().getPromotePrice();
         }
@@ -60,5 +60,22 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public List<Order> list() {
         return orderDao.list();
+    }
+
+    @Override
+    public List<Order> listUserStatus(Integer uid, String excludedStatus) {
+        return orderDao.listUserStatus(uid,excludedStatus);
+    }
+
+    public void fill(Order order){
+        List<OrderItem> orderItems = orderItemDaoImpl.list(order);
+        orderItemDaoImpl.setProductAndImageId(orderItems);
+        order.setOrderItems(orderItems);
+    }
+
+    public void fill(List<Order> orders){
+        for(Order order:orders){
+            fill(order);
+        }
     }
 }

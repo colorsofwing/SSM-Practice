@@ -17,10 +17,12 @@ public interface OrderDao {
 
     //增删改查
     void add(Order order);
-
     float add(Order order, List<OrderItem> ois);
+
     void delete(Integer id);
     void update(Order order);
     Order get(@Param("id") Integer id);
+
     List<Order> list();
+    List<Order> listUserStatus(@Param("uid") Integer uid,@Param("status") String excludedStatus);
 }

@@ -1,5 +1,6 @@
 package tmall.controller;
 
+import org.apache.commons.lang3.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,13 +9,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.HtmlUtils;
 import tmall.comparator.*;
+import tmall.dao.OrderDao;
 import tmall.pojo.*;
 import tmall.service.*;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -38,6 +43,8 @@ public class ForeController {
     private ReviewDaoImpl reviewDaoImpl;
     @Autowired
     private OrderItemDaoImpl orderItemDaoImpl;
+    @Autowired
+    private OrderDaoImpl orderDaoImpl;
 
     @RequestMapping("forehome")
     public String home(Model model) {
@@ -306,5 +313,40 @@ public class ForeController {
         session.setAttribute("ois",ois);
         model.addAttribute("total",total);
         return "fore/buy";
+    }
+
+    @RequestMapping("forecreateOrder")
+    public String createOrder(HttpSession session,Order order,Model model){
+        User user = (User)session.getAttribute("user");
+        List<OrderItem> ois = (List<OrderItem>) session.getAttribute("ois");
+        String orderCode = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())+ RandomUtils.nextInt(0,1000);
+        Date createDate = new Date();
+        order.setOrderCode(orderCode);
+        order.setOrderItems(ois);
+        order.setCreateDate(createDate);
+        order.setUid(user.getId());
+        order.setStatus(OrderDao.WAIT_PAY);
+        float total = orderDaoImpl.add(order,ois);
+        return "redirect:forealipay?oid="+order.getId()+"&total="+total;
+    }
+
+    @RequestMapping("forepayed")
+    public String payed(Integer oid,float total,Model model){
+        Order order = orderDaoImpl.get(oid);
+        order.setPayDate(new Date());
+        order.setStatus(OrderDao.WAIT_DELIVERY);
+        order.setTotal(total);
+        orderDaoImpl.update(order);
+        model.addAttribute("o",order);
+        return "fore/payed";
+    }
+
+    @RequestMapping("forebought")
+    public String bought(HttpSession session,Model model){
+        User user = (User) session.getAttribute("user");
+        List<Order> os = orderDaoImpl.listUserStatus(user.getId(),"delete");
+        orderDaoImpl.fill(os);
+        model.addAttribute("os",os);
+        return "fore/bought";
     }
 }

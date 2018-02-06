@@ -8,6 +8,10 @@
         SELECT * FROM order_ ORDER BY id DESC
     </select>
 
+    <select id="listUserStatus" resultType="tmall.pojo.Order">
+        SELECT * FROM order_ WHERE uid = #{uid} AND status <![CDATA[<]]><![CDATA[>]]> #{status}
+    </select>
+
     <select id="get" resultType="tmall.pojo.Order">
         SELECT * FROM order_ WHERE id = #{id}
     </select>

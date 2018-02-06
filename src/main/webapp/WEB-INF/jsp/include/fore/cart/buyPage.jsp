@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" isELIgnored="false" %>
 
 <div class="buyPageDiv">
-    <form class="forecreateOrder" method="post">
+    <form class="forecreateOrder" method="post" action="forecreateOrder">
 
         <div class="buyFlow">
             <img class="pull-left" src="img/site/simpleLogo.png">
