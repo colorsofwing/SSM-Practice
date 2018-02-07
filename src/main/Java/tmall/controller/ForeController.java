@@ -345,8 +345,13 @@ public class ForeController {
     public String bought(HttpSession session,Model model){
         User user = (User) session.getAttribute("user");
         List<Order> os = orderDaoImpl.listUserStatus(user.getId(),"delete");
-        orderDaoImpl.fill(os);
+        orderItemDaoImpl.fill(os);
         model.addAttribute("os",os);
         return "fore/bought";
+    }
+
+    @RequestMapping("foreconfirmPay")
+    public String confirmPay() {
+        return "fore/confirmPay";
     }
 }

@@ -9,7 +9,7 @@
     </select>
 
     <select id="listUserStatus" resultType="tmall.pojo.Order">
-        SELECT * FROM order_ WHERE uid = #{uid} AND status <![CDATA[<]]><![CDATA[>]]> #{status}
+        SELECT * FROM order_ WHERE uid = #{uid} AND status <![CDATA[<>]]> #{status}
     </select>
 
     <select id="get" resultType="tmall.pojo.Order">

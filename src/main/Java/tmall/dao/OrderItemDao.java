@@ -19,7 +19,8 @@ public interface OrderItemDao {
     List<OrderItem> listProduct(Integer pid);
     //订单计算商品数量和总金额
     void find(Order order);
-    //处理所有订单
+
+    //处理所有订单(订单填充订单项，订单项填充产品项)
     void fill(List<Order> orderList);
     //获取产品销量
     Integer getSalesCount(Integer pid);

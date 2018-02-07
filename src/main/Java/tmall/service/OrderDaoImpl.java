@@ -67,7 +67,7 @@ public class OrderDaoImpl implements OrderDao {
         return orderDao.listUserStatus(uid,excludedStatus);
     }
 
-    public void fill(Order order){
+    /*public void fill(Order order){
         List<OrderItem> orderItems = orderItemDaoImpl.list(order);
         orderItemDaoImpl.setProductAndImageId(orderItems);
         order.setOrderItems(orderItems);
@@ -77,5 +77,5 @@ public class OrderDaoImpl implements OrderDao {
         for(Order order:orders){
             fill(order);
         }
-    }
+    }*/
 }
