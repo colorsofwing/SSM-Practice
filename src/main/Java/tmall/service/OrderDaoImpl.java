@@ -44,7 +44,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public void delete(Integer id) {
-
+        orderDao.delete(id);
     }
 
     @Override
@@ -65,6 +65,21 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public List<Order> listUserStatus(Integer uid, String excludedStatus) {
         return orderDao.listUserStatus(uid,excludedStatus);
+    }
+
+    //判断是否该订单下所有订单项已经得到评论，从而改变订单状态
+    public void orderReview(List<OrderItem> orderItems,Order order){
+        boolean exist = true;
+        for(OrderItem orderItem:orderItems){
+            if(orderItem.getRid()==null){
+                exist = false;
+                break;
+            }
+        }
+        if(exist==true){
+            order.setStatus(OrderDao.FINISH);
+            update(order);
+        }
     }
 
     /*public void fill(Order order){

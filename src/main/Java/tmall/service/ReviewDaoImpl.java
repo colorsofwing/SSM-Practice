@@ -47,7 +47,7 @@ public class ReviewDaoImpl implements ReviewDao {
         return list(pid).size();
     }
 
-    private void setUser(Review review){
+    public void setUser(Review review){
         Integer uid = review.getUid();
         User user = userDao.get(uid);
         review.setUser(user);

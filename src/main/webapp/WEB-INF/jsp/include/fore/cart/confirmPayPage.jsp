@@ -54,10 +54,10 @@
                     </td>
                     <td>${oi.number}</td>
                     <c:if test="${st.count==1}">
-                        <td valign="top" rowspan="${fn:length(o.orderItems)}">
+                        <td rowspan="${fn:length(o.orderItems)}">
                             <div>¥<fmt:formatNumber minFractionDigits="2" type="number" value="${o.total}"/></div>
                         </td>
-                        <td><span>快递 ： 0.00 </span></td>
+                        <td rowspan="${fn:length(o.orderItems)}"><span>快递 ： 0.00 </span></td>
                     </c:if>
                 </tr>
             </c:forEach>
@@ -65,8 +65,7 @@
         </table>
 
         <div class="confirmPayOrderItemText pull-right">
-            实付款： <span class="confirmPayOrderItemSumPrice">¥<fmt:formatNumber type="number" value="${o.total}"
-                                                                              minFractionDigits="2"/></span>
+            实付款： <span class="confirmPayOrderItemSumPrice">¥<fmt:formatNumber type="number" value="${o.total}" minFractionDigits="2"/></span>
         </div>
     </div>
 
@@ -87,7 +86,7 @@
             </tr>
             <tr>
                 <td>成交时间：</td>
-                <td><fmt:formatDate value="${o.createdate}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
+                <td><fmt:formatDate value="${o.createDate}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
             </tr>
         </table>
 

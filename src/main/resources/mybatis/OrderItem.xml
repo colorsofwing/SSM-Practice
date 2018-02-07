@@ -17,7 +17,7 @@
     </select>
 
     <update id="update" parameterType="tmall.pojo.OrderItem">
-        UPDATE orderitem SET number = #{number},oid = #{oid} WHERE id = #{id}
+        UPDATE orderitem SET number = #{number},oid = #{oid},rid = #{rid} WHERE id = #{id}
     </update>
 
     <insert id="add" parameterType="tmall.pojo.OrderItem" keyProperty="id" useGeneratedKeys="true">

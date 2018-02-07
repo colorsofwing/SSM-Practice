@@ -159,7 +159,7 @@ public class ForeController {
         Category category = categoryDaoImpl.get(cid);
         productDaoImpl.fill(category);
         productDaoImpl.setSaleAndReviewNumber(category.getProducts());
-        productDaoImpl.getImage(category.getProducts());
+        productDaoImpl.setImage(category.getProducts());
 
         if(sort!=null){
             switch (sort){
@@ -188,7 +188,7 @@ public class ForeController {
     public String search(@RequestParam("keyword") String keyword,Model model){
         List<Product> products = productDaoImpl.search(keyword);
         productDaoImpl.setSaleAndReviewNumber(products);
-        productDaoImpl.getImage(products);
+        productDaoImpl.setImage(products);
         model.addAttribute("ps",products);
         return "fore/searchResult";
     }
@@ -351,7 +351,66 @@ public class ForeController {
     }
 
     @RequestMapping("foreconfirmPay")
-    public String confirmPay() {
+    public String confirmPay(Integer oid,Model model) {
+        Order order = orderDaoImpl.get(oid);
+        orderItemDaoImpl.find(order);
+        model.addAttribute("o",order);
         return "fore/confirmPay";
+    }
+
+    @RequestMapping("foreorderConfirmed")
+    public String orderConfirmed(Integer oid,Model model){
+        Order order = orderDaoImpl.get(oid);
+        order.setConfirmDate(new Date());
+        order.setStatus(OrderDao.WAIT_REVIEW);
+        /*orderItemDaoImpl.find(order);*/
+        orderDaoImpl.update(order);
+        model.addAttribute("o",order);
+        return "fore/orderConfirmed";
+    }
+
+    @RequestMapping("foredeleteOrder")
+    @ResponseBody
+    public String deleteOrder(Integer oid){
+        Order order = orderDaoImpl.get(oid);
+        order.setStatus(OrderDao.DELETE);
+        orderDaoImpl.update(order);
+        return "success";
+    }
+
+    @RequestMapping("forereview")
+    public String review(Integer oid,Integer pid,Model model){
+        Order order = orderDaoImpl.get(oid);
+        Product product = productDaoImpl.get(pid);
+        productDaoImpl.setImage(product);
+        productDaoImpl.setSaleAndReviewNumber(product);
+        List<Review> reviews = reviewDaoImpl.list(pid);
+        reviewDaoImpl.setUser(reviews);
+
+        model.addAttribute("o",order);
+        model.addAttribute("p",product);
+        model.addAttribute("reviews",reviews);
+        return "fore/review";
+    }
+
+    @RequestMapping("foredoReview")
+    public String doReview(Integer oid,Integer pid,String content,HttpSession session){
+        User user = (User) session.getAttribute("user");
+        Order order = orderDaoImpl.get(oid);
+        List<OrderItem> orderItems = orderItemDaoImpl.list(order);
+
+        content = HtmlUtils.htmlEscape(content);
+        Review review = new Review();
+        review.setContent(content);
+        review.setPid(pid);
+        review.setUid(user.getId());
+        review.setCreateDate(new Date());
+        review.setUser(user);
+
+        reviewDaoImpl.add(review);
+        orderItemDaoImpl.setReview(orderItems,review,pid);
+        orderDaoImpl.orderReview(orderItems,order);
+
+        return "redirect:forereview?oid="+oid+"&pid="+pid+"&showonly=true";
     }
 }

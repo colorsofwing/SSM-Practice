@@ -5,6 +5,10 @@
 
 <mapper namespace="tmall.dao.ReviewDao">
     <select id="list" resultType="tmall.pojo.Review">
-        SELECT * FROM review WHERE id = #{pid}
+        SELECT * FROM review WHERE pid = #{pid}
     </select>
+
+    <insert id="add" parameterType="tmall.pojo.Review" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO review(content,uid,pid,createDate) VALUES (#{content},#{uid},#{pid},#{createDate})
+    </insert>
 </mapper>

@@ -52,10 +52,14 @@ public class ProductDaoImpl implements ProductDao{
         return productDao.getImage(id);
     }
 
-    public void getImage(List<Product> products){
+    public void setImage(Product product){
+        Integer imageId = getImage(product.getId()).get(0);
+        product.setImageId(imageId);
+    }
+
+    public void setImage(List<Product> products){
         for(Product product:products){
-            Integer imageId = getImage(product.getId()).get(0);
-            product.setImageId(imageId);
+            setImage(product);
         }
     }
 

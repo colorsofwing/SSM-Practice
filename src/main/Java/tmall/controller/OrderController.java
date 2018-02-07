@@ -47,9 +47,10 @@ public class OrderController {
 
     @RequestMapping("/admin_order_delivery")
     public String deliver(Order order){
-        order.setDeliveryDate(new Date());
-        order.setStatus(OrderDaoImpl.WAIT_CONFIRM);
-        orderDaoImpl.update(order);
+        Order o = orderDaoImpl.get(order.getId());
+        o.setDeliveryDate(new Date());
+        o.setStatus(OrderDaoImpl.WAIT_CONFIRM);
+        orderDaoImpl.update(o);
         return "redirect:admin_order_list";
     }
 }

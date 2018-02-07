@@ -6,6 +6,7 @@ public class OrderItem {
     private Integer oid;
     private Integer uid;
     private Integer number;
+    private Integer rid;
     //非数据库字段
     private Product product;
 
@@ -55,5 +56,13 @@ public class OrderItem {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public Integer getRid() {
+        return rid;
+    }
+
+    public void setRid(Integer rid) {
+        this.rid = rid;
     }
 }

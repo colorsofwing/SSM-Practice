@@ -7,6 +7,7 @@ import tmall.dao.ProductDao;
 import tmall.pojo.Order;
 import tmall.pojo.OrderItem;
 import tmall.pojo.Product;
+import tmall.pojo.Review;
 
 import java.util.List;
 
@@ -108,5 +109,16 @@ public class OrderItemDaoImpl implements OrderItemDao{
     @Override
     public List<OrderItem> listUser(Integer uid) {
         return orderItemDao.listUser(uid);
+    }
+
+    //设置订单项的rid，表示该订单项已经得到评论
+    public void setReview(List<OrderItem> orderItems, Review review,Integer pid){
+        for(OrderItem orderItem:orderItems){
+            //再次说明：Integer对象先转化成int类型再比较大小
+            if(pid.intValue()==orderItem.getPid().intValue()){
+                orderItem.setRid(review.getId());
+                update(orderItem);
+            }
+        }
     }
 }

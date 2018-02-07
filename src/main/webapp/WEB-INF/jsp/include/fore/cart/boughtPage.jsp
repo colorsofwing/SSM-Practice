@@ -141,38 +141,43 @@
                             <span class="orderListItemNumber">${oi.number}</span>
                         </td>
                         <c:if test="${st.count==1}">
-                            <td valign="top" rowspan="${fn:length(o.orderItems)}" width="120px"
+                            <td rowspan="${fn:length(o.orderItems)}" width="120px"
                                 class="orderListItemProductRealPriceTD orderItemOrderInfoPartTD">
-                                <div class="orderListItemProductRealPrice">￥<fmt:formatNumber minFractionDigits="2"
-                                                                                              type="number"
-                                                                                              value="${o.total}"/></div>
+                                <div class="orderListItemProductRealPrice">
+                                    ¥<fmt:formatNumber minFractionDigits="2" type="number" value="${o.total}"/>
+                                </div>
                                 <div class="orderListItemPriceWithTransport">(含运费：￥0.00)</div>
                             </td>
-                            <td valign="top" rowspan="${fn:length(o.orderItems)}"
-                                class="orderListItemButtonTD orderItemOrderInfoPartTD" width="100px">
-                                <c:if test="${o.status=='waitPay'}">
-                                    <a href="forealipay?oid=${o.id}&total=${o.total}">
-                                        <button class="orderListItemConfirm">付款</button>
-                                    </a>
-                                </c:if>
-                                <c:if test="${o.status=='waitConfirm'}">
-                                    <a href="foreconfirmPay?oid=${o.id}">
-                                        <button class="orderListItemConfirm">确认收货</button>
-                                    </a>
-                                </c:if>
-                                <c:if test="${o.status=='waitDelivery' }">
-                                    <span>待发货</span>
-                                    <button class="btn btn-info btn-sm ask2delivery"
-                                            link="admin_order_delivery?id=${o.id}">催卖家发货
-                                    </button>
-                                </c:if>
-                                <c:if test="${o.status='waitReview'}">
-                                    <a href="forereview?oid=${o.id}">
+                        </c:if>
+                        <c:choose>
+                            <c:when test="${st.count==1 && o.status != 'waitReview'}">
+                                <td rowspan="${fn:length(o.orderItems)}" class="orderListItemButtonTD orderItemOrderInfoPartTD" width="100px">
+                                    <c:if test="${o.status=='waitPay'}">
+                                        <a href="forealipay?oid=${o.id}&total=${o.total}">
+                                            <button class="orderListItemConfirm">付款</button>
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${o.status=='waitConfirm'}">
+                                        <a href="foreconfirmPay?oid=${o.id}">
+                                            <button class="orderListItemConfirm">确认收货</button>
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${o.status=='waitDelivery' }">
+                                        <span>待发货</span>
+                                        <button class="btn btn-info btn-sm ask2delivery"
+                                                link="admin_order_delivery?id=${o.id}">催卖家发货
+                                        </button>
+                                    </c:if>
+                                </td>
+                            </c:when>
+                            <c:when test="${o.status == 'waitReview'}">
+                                <td class="orderListItemButtonTD orderItemOrderInfoPartTD" width="100px">
+                                    <a href="forereview?oid=${o.id}&pid=${oi.pid}">
                                         <button class="orderListItemReview">评价</button>
                                     </a>
-                                </c:if>
-                            </td>
-                        </c:if>
+                                </td>
+                            </c:when>
+                        </c:choose>
                     </tr>
                 </c:forEach>
             </table>
